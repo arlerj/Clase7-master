@@ -15,7 +15,14 @@ $(document).ready(function(e) {
 		
 		//Crear Contactos
 		$('#nuevoCont .individual li').eq(0).tap(function(){
-			var nueContacto = navigator.contacts.create({"displayName": $('#nuevoCont .rounded li').eq(0).children('input').val(), "name": $('#nuevoCont .rounded li').eq(0).children('input').val() });
+			var nueContacto = navigator.contacts.create();
+			
+			nueContacto.displayName = $('#nuevoCont .rounded li').eq(0).children('input').val();
+			nueContacto.nickName = $('#nuevoCont .rounded li').eq(0).children('input').val();
+			
+			var nombre = new ContactName();
+			nombre.givenName = $('#nuevoCont .rounded li').eq(0).children('input').val();
+			nueContacto.name = nombre;
 			
 			var telefono = [];
 			telefono[0] = new ContactField('home', $('#nuevoCont .rounded li').eq(0).children('input').val(), true);
