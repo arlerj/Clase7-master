@@ -3,10 +3,10 @@ $(document).ready(function(e) {
     document.addEventListener("deviceready", function(){
 		
 		//Leer Contactos
-		navigator.contacts.find(["name"], function(contactos){
+		navigator.contacts.find(["displayName", "name"], function(contactos){
 		
 		for(i=0;i<contactos.length;i++){
-			$('contactos .plastic').append('<li>'+contactos[i].name.givenName+'</li>');
+			$('contactos .plastic').append('<li>'+contactos[i].dsplayName+'</li>');
 		}
 		
 		}, function(err){
