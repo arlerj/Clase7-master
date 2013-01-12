@@ -2,16 +2,27 @@
 $(document).ready(function(e) {
     document.addEventListener("deviceready", function(){
 		
-		//Leer Contactos
-		navigator.contacts.find(["displayName", "name"], function(contactos){
+		function onDeviceReady() {
+        var options = new ContactFindOptions();
+        options.filter=""; 
+        var fields = ["displayName", "name"];
+		options.multiple = true;
+        navigator.contacts.find(fields, onSuccess, onError, options);
+    	}
 		
-		for(i=0;i<contactos.length;i++){
-			$('contactos .plastic').append('<li>'+contactos[i].dsplayName+'</li>');
-		}
-		
-		}, function(err){
-			alert('Error: '+err.code);
-		}, { filter: "", multiple: true });
+		// onSuccess: Get a snapshot of the current contacts
+    	//
+    	function onSuccess(contacts) {
+        	for(var i=0;i<contacts.length;i++){
+			$('contactos .plastic').append('<li>'+contacts[i].displayName+'</li>');
+			}
+    	}
+
+	    // onError: Failed to get the contacts
+    	//
+	    function onError(contactError) {
+        	alert('onError!');
+    	}
 		
 		//Crear Contactos
 		$('#nuevoCont .individual li').eq(0).tap(function(){
