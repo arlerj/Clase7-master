@@ -6,7 +6,7 @@ $(document).ready(function(e) {
 		navigator.contacts.find(["name"], function(contactos){
 		
 		for(i=0;i<contactos.length;i++){
-			$('contactos .plastic').append('<li>'+contactos[i].name+'</li>');
+			$('contactos .plastic').append('<li>'+contactos[i].name.givenName+'</li>');
 		}
 		
 		}, function(err){
