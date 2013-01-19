@@ -20,15 +20,36 @@ $(document).ready(function(e) {
         writer.write($('#archivosCamp').val());
     }
 	
-	function fail(err){
-		alert('Error: '+err.code);	
-	}
 					break;
 				
 				
 				case 1://Leer Archivo
-					
+					window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+					function gotFS(fileSystem) {
+        fileSystem.root.getFile("readme.txt", null, gotFileEntry, fail);
+    }
+
+    function gotFileEntry(fileEntry) {
+        fileEntry.file(gotFile, fail);
+    }
+
+    function gotFile(file){
+        readAsText(file);
+    }
+
+    function readAsText(file) {
+        var reader = new FileReader();
+        reader.onloadend = function(evt) {
+        	alert('Archivo leído');
+//            console.log(evt.target.result);
+        };
+        $('#archivosCamp').val(reader.readAsText(file));
+    }
 			}
 		});
 	});
 });
+
+	function fail(err){
+		alert('Error: '+err.code);	
+	}
