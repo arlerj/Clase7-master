@@ -19,7 +19,13 @@ $(document).ready(function(e) {
         };
         writer.write($('#archivosCamp').val());
     }
+	
+	function fail(err){
+		alert('Error: '+err.code);	
+	}
 					break;
+				
+				
 				case 1://Leer Archivo
 					
 			}
